@@ -4,7 +4,7 @@
 using namespace std;
 
 // Function to get the multiplier for a given unit
-long double getMultiplier(string unit) {
+double getMultiplier(string unit) {
     if (unit == "kb" || unit == "Kb") return 1000;
     if (unit == "kB" || unit == "KB") return 8000;
     if (unit == "kib" || unit == "Kib") return 1024;
@@ -23,17 +23,18 @@ long double getMultiplier(string unit) {
 }
 
 // Function to convert between units
-long double convertUnits(long double value, string input, string output) {
+string convertUnits(double value, string input, string output) {
     // Calculate the conversion factor
-    long double conversion = getMultiplier(input) / getMultiplier(output);
+    double conversion = getMultiplier(input) / getMultiplier(output);
+    double numValue = (value * conversion);
 
     // Convert the value and return
-    return value * conversion;
+    return to_string(numValue);
 }
 
 int main() {
     // Read inputs in the specified format
-    long double value;
+    double value;
     string inputUnit, outputUnit;
 
     cout << "Enter the value to convert: ";
@@ -46,7 +47,7 @@ int main() {
     cin >> outputUnit;
 
     // Convert units and display result
-    long double result = convertUnits(value, inputUnit, outputUnit);
+    string result = convertUnits(value, inputUnit, outputUnit);
     cout << "Converted value: " << result << endl;
 
     return 0;
